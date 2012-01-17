@@ -1,4 +1,3 @@
-
 # MacPorts Installer addition on 2012-01-10_at_04:01:20: adding an appropriate PATH variable for use with MacPorts.
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
@@ -24,3 +23,4 @@ export PS1="\[\033[1;33m\]\u\[\033[0m\]@\h\[\033[36m\] [\w]\[\033[0m\] \$(parse_
 alias ls="ls -GF"
 alias ll="ls -lhAGF"
 alias top="top -ocpu"
+alias sshR="ssh -l username "
