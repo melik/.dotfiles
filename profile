@@ -25,4 +25,3 @@ alias ll="ls -lhAGF"
 alias top="top -ocpu"
 alias sshR="ssh -l username "
 alias myIP='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2'
-alias "svn st" = "svn st"
