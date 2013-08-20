@@ -32,5 +32,9 @@
 	changed = green
 	untracked = cyan
 
+[core]
+	autocrlf = true
+	pager = less -R
+
 [github]
-user = melik
+	user = melik
