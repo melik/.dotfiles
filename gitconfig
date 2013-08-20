@@ -11,7 +11,7 @@
 
 [alias]
 	l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
-	s = status
+	st = status
 	b = branch
 	co = checkout
 	c = commit
