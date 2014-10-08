@@ -2,6 +2,11 @@
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 
+# Autocomplete Git Commands and Branch Names in Bash
+# curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
 
 # Bash Promt Custom http://asemanfar.com/Current-Git-Branch-in-Bash-Prompt
 parse_git_branch() {
