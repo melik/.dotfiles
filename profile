@@ -21,7 +21,7 @@ parse_svn_url() {
 parse_svn_repository_root() {
     svn info 2>/dev/null | grep -e '^Repository Root:*' | sed -e 's#^Repository Root: *\(.*\)#\1\/#g '
 }
-export PS1="\[\033[1;33m\]\u\[\033[0m\]@\h\[\033[36m\] [\w]\[\033[0m\] \$(parse_git_branch)\$(parse_svn_branch)\[\033[37m\]$\[\033[00m\] "
+export PS1="\[\033[1;33m\]\u\[\033[36m\] [\w]\[\033[0m\] \$(parse_git_branch)\$(parse_svn_branch)\[\033[37m\]$\[\033[00m\] "
 
 
 # Alias
