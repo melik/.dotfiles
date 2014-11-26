@@ -33,7 +33,7 @@
 	untracked = cyan
 
 [core]
-	autocrlf = true
+	autocrlf = false
 	pager = less -R
 
 [github]
