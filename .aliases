@@ -1,0 +1,26 @@
+# ZSH
+alias zshconfig="subl ~/.zshrc"
+alias ohmyzsh="subl ~/.oh-my-zsh"
+
+# Shell
+alias la="ls -halk"
+alias ll="ls -lhAGF"
+alias ls="ls -GF"
+
+alias top="top -ocpu"
+alias myip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2'
+
+alias passgen="openssl rand -base64 14"
+alias gen="echo -n "word" | openssl md5"
+
+# aliases for jail's
+# alias serverName="ssh -l login serverUrl"
+
+# aliases for ssh keys
+# alias key='ssh-add ~/.ssh/key'
+
+# Editors
+alias s='subl'
+alias a='atom'
+alias t='mate'
+alias n='nano'

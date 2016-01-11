@@ -1,2 +1,3 @@
-gitconfig - ~/.gitconfig - Git
-profile - ~/.profile - Bash Mac OS X
+.gitconfig - ~/.gitconfig - Git
+.profile - ~/.profile - Bash Mac OS X
+.aliases - ~/.aliases - For .zshrc
