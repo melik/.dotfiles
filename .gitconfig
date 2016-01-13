@@ -1,7 +1,3 @@
-[user]
-	name = 
-	email = 
-
 [color]
 	diff = auto
 	status = auto
@@ -35,6 +31,3 @@
 [core]
 	autocrlf = false
 	pager = less -R
-
-[github]
-	user = melik
