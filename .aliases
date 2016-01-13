@@ -21,7 +21,7 @@ alias gen="echo -n "word" | openssl md5"
 
 alias nginxStart="sudo /etc/init.d/nginx start"
 alias nginxRestart="sudo nginx -s reload"
-alias nginxTest=sudo nginx -t"
+alias nginxTest="sudo nginx -t"
 
 # Editors
 alias s='subl'
