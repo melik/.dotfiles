@@ -19,6 +19,10 @@ alias gen="echo -n "word" | openssl md5"
 # aliases for ssh keys
 # alias key='ssh-add ~/.ssh/key'
 
+alias "nginx start"="sudo /etc/init.d/nginx start"
+alias "nginx restart"=sudo nginx -s reload
+alias "nginx test"=sudo nginx -t"
+
 # Editors
 alias s='subl'
 alias a='atom'
