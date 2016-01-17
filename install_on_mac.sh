@@ -3,17 +3,21 @@
 cd "$(dirname "${BASH_SOURCE}")";
 
 function doIt() {
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-    brew install zsh
-    chsh -s /usr/local/bin/zsh
-
     brew install wget
 
-    brew install dnsmasq
+    brew install zsh
+    zsh_path=$(which zsh)
+    grep -Fxq "$zsh_path" /etc/shells || sudo bash -c "echo $zsh_path >> /etc/shells"
+    chsh -s "$zsh_path" $USER
+}
+
+function installBrew() {
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 }
 
 function installDnsmasq() {
+    brew install dnsmasq
+
     echo ""
 
     cd $(brew --prefix)
@@ -23,7 +27,7 @@ function installDnsmasq() {
     echo "Copy the default configuration file"
     cp $(brew list dnsmasq | grep /dnsmasq.conf.example$) /usr/local/etc/dnsmasq.conf
 
-    read -p "Insert 'address=/.dev/192.168.50.4' in file '"$(brew --prefix)"/etc/dnsmasq.conf'. Are you sure? (y/n) " -n 1
+    read -p "Insert 'address=/.dev/192.168.50.4' in file '"$(brew --prefix)"/etc/dnsmasq.conf'. Are you sure? (y/N) " -n 1
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo 'address=/.dev/192.168.50.4' >> etc/dnsmasq.conf
         echo ""
@@ -37,7 +41,7 @@ function installDnsmasq() {
     sudo mkdir -p /etc/resolver
 
     echo ""
-    read -p "Insert 'nameserver 192.168.50.4' in file '/etc/resolver/dev'. Are you sure? (y/n) " -n 1
+    read -p "Insert 'nameserver 192.168.50.4' in file '/etc/resolver/dev'. Are you sure? (y/N) " -n 1
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         sudo bash -c 'echo "nameserver 192.168.50.4" > /etc/resolver/dev'
         echo ""
@@ -49,20 +53,28 @@ function installDnsmasq() {
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
-    doIt;
+    installBrew;
     installDnsmasq;
+    doIt;
 else
-    read -p "This may install Homebrew and other packeges. Are you sure? (y/n) " -n 1;
+    read -p "This may install Homebrew. Are you sure? (y/N) " -n 1;
+    echo "";
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        installBrew;
+    fi;
+
+    read -p "This may install dnsmasq and config it. Are you sure? (y/N) " -n 1;
+    echo "";
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        installDnsmasq;
+    fi;
+
+    read -p "This may install other packeges. Are you sure? (y/N) " -n 1;
     echo "";
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         doIt;
     fi;
 
-    read -p "Now this may install dnsmasq and config it. Are you sure? (y/n) " -n 1;
-    echo "";
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        installDnsmasq;
-    fi;
 fi;
 
 unset doIt;
