@@ -2,6 +2,8 @@
 
 cd "$(dirname "${BASH_SOURCE}")";
 
+git pull origin master;
+
 function doIt() {
     brew install wget
 
@@ -74,8 +76,9 @@ else
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         doIt;
     fi;
-
 fi;
+
+sh bootstrap.sh
 
 unset doIt;
 unset installDnsmasq;

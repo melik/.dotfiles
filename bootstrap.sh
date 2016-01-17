@@ -44,9 +44,12 @@ function doIt() {
     sed -i -e 's/plugins=(.*)/plugins=(rspec git github gitignore svn node npm pip virtualenv python macports colored-man-pages vagrant)/' ~/.zshrc
 
     # Add default user
-    echo ""
-    echo "DEFAULT_USER="$USER >> ~/.zshrc
-    echo ""
+    read -p "This may insert DEFAULT_USER in .zshrc. Are you sure? (y/N) " -n 1;
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "" >> ~/.zshrc
+        echo "DEFAULT_USER="$USER >> ~/.zshrc
+        echo "" >> ~/.zshrc
+    fi;
 
     env zsh
 
