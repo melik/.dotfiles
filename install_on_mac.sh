@@ -29,9 +29,9 @@ function installDnsmasq() {
     echo "Copy the default configuration file"
     cp $(brew list dnsmasq | grep /dnsmasq.conf.example$) /usr/local/etc/dnsmasq.conf
 
-    read -p "Insert 'address=/.dev/192.168.50.4' in file '"$(brew --prefix)"/etc/dnsmasq.conf'. Are you sure? (y/N) " -n 1
+    read -p "Insert 'address=/.dev/127.0.0.1' in file '"$(brew --prefix)"/etc/dnsmasq.conf'. Are you sure? (y/N) " -n 1
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo 'address=/.dev/192.168.50.4' >> etc/dnsmasq.conf
+        echo 'address=/.dev/127.0.0.1' >> etc/dnsmasq.conf
         echo ""
         echo "Update '$(brew --prefix)/etc/dnsmasq.conf'";
     fi;
@@ -43,9 +43,9 @@ function installDnsmasq() {
     sudo mkdir -p /etc/resolver
 
     echo ""
-    read -p "Insert 'nameserver 192.168.50.4' in file '/etc/resolver/dev'. Are you sure? (y/N) " -n 1
+    read -p "Insert 'nameserver 127.0.0.1' in file '/etc/resolver/dev'. Are you sure? (y/N) " -n 1
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        sudo bash -c 'echo "nameserver 192.168.50.4" > /etc/resolver/dev'
+        sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/dev'
         echo ""
         echo "Update '/etc/resolver/dev'";
     fi;
