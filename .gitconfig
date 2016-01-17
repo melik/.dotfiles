@@ -31,3 +31,11 @@
 [core]
 	autocrlf = false
 	pager = less -R
+
+[apply]
+	# Detect whitespace errors when applying a patch
+	whitespace = fix
+
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1

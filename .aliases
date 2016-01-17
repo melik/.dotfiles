@@ -1,26 +1,46 @@
-# ZSH
-alias zshconfig="subl ~/.zshrc"
-alias ohmyzsh="subl ~/.oh-my-zsh"
+# Detect which `ls` flavor is in use
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+    colorflag="--color"
+else # OS X `ls`
+    colorflag="-G"
+fi
 
-# Shell
+# List files and folders
 alias la="ls -halk"
-alias ll="ls -lhAGF"
+alias ll="ls -lhAGF ${colorflag}"
 alias ls="ls -GF"
+
+# Always enable colored `grep` output
+# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Shortcuts
+alias g="git"
+alias h="history"
+alias j="jobs"
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec $SHELL -l"
 
 alias top="top -ocpu"
 alias myip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2'
 
 alias passgen="openssl rand -base64 14"
-alias gen="echo -n "word" | openssl md5"
-
-# aliases for jail's
-# alias serverName="ssh -l login serverUrl"
-
-# aliases for ssh keys
-# alias key='ssh-add ~/.ssh/key'
 
 # Editors
 alias s='subl'
 alias a='atom'
 alias t='mate'
 alias n='nano'
+
+# ZSH
+alias zshconfig="subl ~/.zshrc"
+alias ohmyzsh="subl ~/.oh-my-zsh"
+
+# aliases for jail's
+# alias serverName="ssh -l login serverUrl"
+
+# aliases for ssh keys
+# alias key='ssh-add ~/.ssh/key'
