@@ -31,6 +31,7 @@
 [core]
 	autocrlf = false
 	pager = less -R
+	editor = nano
 
 [apply]
 	# Detect whitespace errors when applying a patch
