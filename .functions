@@ -1,0 +1,9 @@
+# Create a new directory and enter it
+function md() {
+    mkdir -p "$@" && cd "$@"
+}
+
+# Create md5 hash from word
+function md() {
+    echo -n "$@" | openssl md5
+}
