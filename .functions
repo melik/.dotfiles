@@ -4,6 +4,6 @@ function md() {
 }
 
 # Create md5 hash from word
-function md() {
+function makeMD5() {
     echo -n "$@" | openssl md5
 }
