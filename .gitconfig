@@ -47,3 +47,6 @@
 [user]
 	name = Alexey M
 	email = melik.alexey@gmail.com
+
+[push]
+	default = matching
