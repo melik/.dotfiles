@@ -41,4 +41,8 @@
 	autocorrect = 1
 
 [github]
- 	user = melik
+	user = melik
+
+[user]
+	name = Alexey M
+	email = melik.alexey@gmail.com
