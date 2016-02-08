@@ -39,6 +39,8 @@ alias n='nano'
 alias zshconfig="subl ~/.zshrc"
 alias ohmyzsh="subl ~/.oh-my-zsh"
 
+alias vagdir="cd ~/Vagrant/ && cd"
+
 # aliases for jail's
 # alias serverName="ssh -l login serverUrl"
 
