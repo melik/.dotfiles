@@ -51,6 +51,11 @@ function doIt() {
         echo "" >> ~/.zshrc
     fi;
 
+    # Stop AUTO_CD - Changing Directories
+    echo "" >> ~/.zshrc
+    echo "unsetopt AUTO_CD" >> ~/.zshrc
+    echo "" >> ~/.zshrc
+
     env zsh
 
     source ~/.zshrc;
