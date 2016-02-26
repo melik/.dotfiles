@@ -39,10 +39,14 @@ alias n='nano'
 alias zshconfig="subl ~/.zshrc"
 alias ohmyzsh="subl ~/.oh-my-zsh"
 
-alias vagdir="cd ~/Vagrant/ && cd"
+# Get week number
+alias week='date +%V'
 
 # aliases for jail's
 # alias serverName="ssh -l login serverUrl"
 
 # aliases for ssh keys
 # alias key='ssh-add ~/.ssh/key'
+
+alias vgye="cd ~/Vagrant/Yeltsin"
+alias vgst="cd ~/Vagrant/Standart"
