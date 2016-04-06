@@ -32,7 +32,8 @@ function installDnsmasq() {
     read -p "Insert 'address=/.dev/192.168.50.4' in file '"$(brew --prefix)"/etc/dnsmasq.conf'. Are you sure? (y/N) " -n 1
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo '' >> etc/dnsmasq.conf
-        echo 'address=/.dev/192.168.50.4' >> etc/dnsmasq.conf
+        # echo 'address=/.dev/192.168.50.4' >> etc/dnsmasq.conf
+        echo 'address=/dev/192.168.50.4' >> etc/dnsmasq.conf
         echo ""
         echo "Update '$(brew --prefix)/etc/dnsmasq.conf'";
     fi;
