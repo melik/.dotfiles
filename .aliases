@@ -50,3 +50,5 @@ alias week='date +%V'
 
 alias vgye="cd ~/Vagrant/Yeltsin"
 alias vgst="cd ~/Vagrant/Standart"
+
+alias vgssh="vagrant up && vagrant ssh"
