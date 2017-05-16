@@ -41,7 +41,7 @@ function doIt() {
     # Customize theme
     sed -i -e 's/ZSH_THEME=".*"/ZSH_THEME="agnoster"/' ~/.zshrc
     # Config plugins
-    sed -i -e 's/plugins=(.*)/plugins=(rspec git github gitignore svn node npm pip virtualenv python macports colored-man-pages vagrant django)/' ~/.zshrc
+    sed -i -e 's/plugins=(.*)/plugins=(rspec git github gitignore svn node npm yarn pip virtualenv python macports colored-man-pages vagrant django)/' ~/.zshrc
 
     # Add default user
     read -p "This may insert DEFAULT_USER in .zshrc. Are you sure? (y/N) " -n 1;
