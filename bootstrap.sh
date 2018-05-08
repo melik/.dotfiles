@@ -6,19 +6,25 @@ git pull origin master;
 
 function patchFonts() {
     # Install patch fornts for oh-my-zsh theme agnoster
-    if [ ! -d .powerline_fonts ]; then
-        git clone https://github.com/powerline/fonts.git .powerline_fonts
+    if [ ! -d ~/.powerline_fonts ]; then
+        git clone https://github.com/powerline/fonts.git ~/.powerline_fonts
     else
-        cd .powerline_fonts
+        cd ~/.powerline_fonts
         git pull
         cd -
     fi
-    sh .powerline_fonts/install.sh
+    sh ~/.powerline_fonts/install.sh
+
+    rm -rf ~/.powerline_fonts
+
+    cd ~
 }
 
 function doIt() {
+    cd ~/.dotfiles
+
     rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
-        --exclude "install_on_mac.sh" --exclude "sublime/" --exclude "README.md" \
+        --exclude "install_on_mac.sh" --exclude "README.md" \
         --exclude ".gitignore" --exclude ".powerline_fonts" -avh --no-perms . ~;
 
     # oh-my-zsh
@@ -28,37 +34,44 @@ function doIt() {
     else
         cd ~/.oh-my-zsh
         git pull
-        cd -
+        cd ~
     fi
 
     # Create a new zsh configuration from the provided template
-    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+    # cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 
-    # Add aliases
+    # Prepare .zshrc
     echo ""
+    echo "Prepare .zshrc"
+
+    rm ~/.zshrc
+    echo "" >> ~/.zshrc
+    echo "export ZSH=\$HOME/.oh-my-zsh" >> ~/.zshrc
+
+    echo "" >> ~/.zshrc
+    echo "ZSH_THEME=\"agnoster\"" >> ~/.zshrc
+
+    echo "" >> ~/.zshrc
+    echo "plugins=(rspec git github gitignore svn node npm yarn pip virtualenv python macports colored-man-pages vagrant django docker-compose docker)" >> ~/.zshrc
+
+    echo "" >> ~/.zshrc
+    echo "# Add default user" >> ~/.zshrc
+    echo "DEFAULT_USER=melik" >> ~/.zshrc
+
+    echo "" >> ~/.zshrc
+    echo "# Stop AUTO_CD - Changing Directories" >> ~/.zshrc
+    echo "unsetopt AUTO_CD" >> ~/.zshrc
+
+    echo "" >> ~/.zshrc
+    echo "source \$ZSH/oh-my-zsh.sh" >> ~/.zshrc
     echo "source ~/.aliases" >> ~/.zshrc
     echo "source ~/.functions" >> ~/.zshrc
-    # Customize theme
-    sed -i -e 's/ZSH_THEME=".*"/ZSH_THEME="agnoster"/' ~/.zshrc
-    # Config plugins
-    sed -i -e 's/plugins=(.*)/plugins=(rspec git github gitignore svn node npm yarn pip virtualenv python macports colored-man-pages vagrant django docker-compose docker)/' ~/.zshrc
-
-    # Add default user
-    read -p "This may insert DEFAULT_USER in .zshrc. Are you sure? (y/N) " -n 1;
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "" >> ~/.zshrc
-        echo "DEFAULT_USER="$USER >> ~/.zshrc
-        echo "" >> ~/.zshrc
-    fi;
-
-    # Stop AUTO_CD - Changing Directories
-    echo "" >> ~/.zshrc
-    echo "unsetopt AUTO_CD" >> ~/.zshrc
-    echo "" >> ~/.zshrc
 
     env zsh
 
     source ~/.zshrc;
+
+    cd ~
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
@@ -80,3 +93,5 @@ fi;
 
 unset doIt;
 unset patchFonts;
+
+cd ~

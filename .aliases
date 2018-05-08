@@ -30,14 +30,11 @@ alias myip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2'
 alias passgen="openssl rand -base64 14"
 
 # Editors
-alias s='subl'
 alias a='atom'
-alias t='mate'
-alias n='nano'
 
 # ZSH
-alias zshconfig="subl ~/.zshrc"
-alias ohmyzsh="subl ~/.oh-my-zsh"
+# alias zshconfig="subl ~/.zshrc"
+# alias ohmyzsh="subl ~/.oh-my-zsh"
 
 # Get week number
 alias week='date +%V'
@@ -47,8 +44,8 @@ alias week='date +%V'
 
 # aliases for ssh keys
 # alias key='ssh-add ~/.ssh/key'
+alias key='ssh-add ~/.ssh/id_rsa'
 
-alias vgye="cd ~/Vagrant/Yeltsin"
+# Vagrant
 alias vgst="cd ~/Vagrant/Standart"
-
 alias vgssh="vagrant up && vagrant ssh"

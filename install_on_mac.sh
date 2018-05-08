@@ -5,19 +5,44 @@ cd "$(dirname "${BASH_SOURCE}")";
 git pull origin master;
 
 function doIt() {
+    cd ~
+
     brew install wget
 
     brew install zsh
     zsh_path=$(which zsh)
     grep -Fxq "$zsh_path" /etc/shells || sudo bash -c "echo $zsh_path >> /etc/shells"
     chsh -s "$zsh_path" $USER
+
+    updateAtom;
+
+    cd ~
+}
+
+function updateAtom() {
+    cd ~
+
+    read -p "Did you install Atom and Dropbox? Move '.atom' to Dropbox? (y/N) " -n 1;
+    echo "";
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      rm -rf ~/.atom
+      ln -s ~/Dropbox/Приложения/Atom ~/.atom
+    fi;
+
+    cd ~
 }
 
 function installBrew() {
+    cd ~
+
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+    cd ~
 }
 
 function installDnsmasq() {
+    cd ~
+
     brew install dnsmasq
 
     echo ""
@@ -51,7 +76,8 @@ function installDnsmasq() {
     echo "Update '/etc/resolver/test'";
 
     echo ""
-    cd -
+
+    cd ~
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
@@ -71,14 +97,18 @@ else
         installDnsmasq;
     fi;
 
-    read -p "This may install other packeges. Are you sure? (y/N) " -n 1;
+    read -p "This may install other packages. Are you sure? (y/N) " -n 1;
     echo "";
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         doIt;
     fi;
 fi;
 
-sh bootstrap.sh
+sh ~/.dotfiles/bootstrap.sh
 
 unset doIt;
+unset updateAtom;
 unset installDnsmasq;
+unset installBrew;
+
+cd ~
