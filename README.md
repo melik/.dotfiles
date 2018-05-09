@@ -1,1 +1,1 @@
-sh ~./dotfiles/install_mac.sh
+sh ~./dotfiles/install_on_mac.sh
