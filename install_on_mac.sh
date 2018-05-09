@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+black=$'\e[30m';
+red=$'\e[31m';
+green=$'\e[32m';
+yellow=$'\e[33m';
+blue=$'\e[34m';
+purple=$'\e[35m';
+cyan=$'\e[36m';
+gray=$'\e[37m';
+reset=$'\e[0m';
+
 cd "$(dirname "${BASH_SOURCE}")";
 
 git pull origin master;
@@ -16,17 +26,22 @@ function doIt() {
 
     updateAtom;
 
+    sh ~/.dotfiles/bootstrap.sh;
+
     cd ~
 }
 
 function updateAtom() {
     cd ~
 
-    read -p "Did you install Atom and Dropbox? Move '.atom' to Dropbox? (y/N) " -n 1;
+    read -p "${red}Did you install Atom and Dropbox? Move '.atom' to Dropbox? (y/N)${reset} " -n 1;
     echo "";
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-      rm -rf ~/.atom
-      ln -s ~/Dropbox/Приложения/Atom ~/.atom
+        echo "yes"
+        rm -rf ~/.atom
+        ln -s ~/Dropbox/Приложения/Atom ~/.atom
+    else
+        echo "no"
     fi;
 
     cd ~
@@ -85,26 +100,33 @@ if [ "$1" == "--force" -o "$1" == "-f" ]; then
     installDnsmasq;
     doIt;
 else
-    read -p "This may install Homebrew. Are you sure? (y/N) " -n 1;
+    read -p "${red}This may install Homebrew. Are you sure? (y/N)${reset} " -n 1;
     echo "";
     if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "yes";
         installBrew;
+    else
+        echo "no"
     fi;
 
-    read -p "This may install dnsmasq and config it. Are you sure? (y/N) " -n 1;
+    read -p "${red}This may install dnsmasq and config it. Are you sure? (y/N)${reset} " -n 1;
     echo "";
     if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "yes";
         installDnsmasq;
+    else
+        echo "no"
     fi;
 
-    read -p "This may install other packages. Are you sure? (y/N) " -n 1;
+    read -p "${red}This may install other packages. Are you sure? (Y/n)${reset} " -n 1;
     echo "";
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
+    if [[ $REPLY =~ ^[Nn]$ ]]; then
+        echo "no"
+    else
+        echo "yes"
         doIt;
     fi;
 fi;
-
-sh ~/.dotfiles/bootstrap.sh
 
 unset doIt;
 unset updateAtom;
