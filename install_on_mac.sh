@@ -24,8 +24,6 @@ function doIt() {
     grep -Fxq "$zsh_path" /etc/shells || sudo bash -c "echo $zsh_path >> /etc/shells"
     chsh -s "$zsh_path" $USER
 
-    updateAtom;
-
     sh ~/.dotfiles/bootstrap.sh;
 
     cd ~
@@ -34,15 +32,8 @@ function doIt() {
 function updateAtom() {
     cd ~
 
-    read -p "${red}Did you install Atom and Dropbox? Move '.atom' to Dropbox? (y/N)${reset} " -n 1;
-    echo "";
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "yes"
-        rm -rf ~/.atom
-        ln -s ~/Dropbox/Приложения/Atom ~/.atom
-    else
-        echo "no"
-    fi;
+    rm -rf ~/.atom
+    ln -s ~/Dropbox/Приложения/Atom ~/.atom
 
     cd ~
 }
@@ -114,6 +105,15 @@ else
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo "yes";
         installDnsmasq;
+    else
+        echo "no"
+    fi;
+
+    read -p "${red}Did you install Atom and Dropbox? Move '.atom' to Dropbox? (y/N)${reset} " -n 1;
+    echo "";
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "yes";
+        updateAtom;
     else
         echo "no"
     fi;
