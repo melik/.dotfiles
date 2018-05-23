@@ -8,7 +8,64 @@ function makeMD5() {
     echo -n "$@" | openssl md5
 }
 
-# Prepare Sublime for open from terminal
-function sublimeFromTerminal() {
-    ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
+# Insert right HOST into _HOST_
+function mount_HOST_() {
+    MOUNT_PROJECT=$1;
+    MOUNT_LOGIN=$2;
+    CURRENT_LOGIN="$(id -u -n)";
+    MOUNT_COMMENTS=$@;
+
+    MOUNT_HOST="_HOST_";
+    MOUNT_POINT="/Users/$CURRENT_LOGIN/Sites";
+
+    if [ "$MOUNT_PROJECT" = "" ]; then
+        echo "Need project name";
+        echo "exit";
+        return 1;
+    else
+        if [ "$MOUNT_LOGIN" = "" ]; then
+            echo "Use local user $CURRENT_LOGIN";
+
+            MOUNT_LOGIN="$CURRENT_LOGIN";
+        fi
+
+        echo "Host: $MOUNT_HOST";
+        echo "User: $MOUNT_LOGIN";
+        echo "Project: $MOUNT_PROJECT";
+        echo "";
+
+        if [ ! -d "$MOUNT_POINT/$MOUNT_PROJECT" ]; then
+            echo "mkdir $MOUNT_POINT/$MOUNT_PROJECT";
+            mkdir "$MOUNT_POINT/$MOUNT_PROJECT"
+        fi
+
+        # https://github.com/osxfuse/osxfuse/wiki/Mount-options
+        echo "sshfs -o auto_cache,local,volname=_HOST_/$MOUNT_PROJECT $MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PROJECT $MOUNT_POINT/$MOUNT_PROJECT";
+        sshfs -o auto_cache,local,volname=_HOST_/$MOUNT_PROJECT "$MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PROJECT" "$MOUNT_POINT/$MOUNT_PROJECT";
+    fi
+
+    echo "";
+}
+
+function unmountHOST() {
+    CURRENT_LOGIN="$(id -u -n)";
+
+    MOUNT_POINT="/Users/$CURRENT_LOGIN/Sites";
+
+    MOUNT_PROJECT=$1
+
+    if [ "$MOUNT_PROJECT" = "" ]; then
+        echo "Need project name";
+        echo "exit";
+        return 1;
+    else
+
+        echo "umount -f $MOUNT_POINT/$MOUNT_PROJECT";
+        umount -f "$MOUNT_POINT/$MOUNT_PROJECT";
+
+        echo "rm -rf $MOUNT_POINT/$MOUNT_PROJECT";
+        rm -rf "$MOUNT_POINT/$MOUNT_PROJECT";
+    fi
+
+    echo "";
 }
