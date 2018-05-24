@@ -10,7 +10,16 @@ fi
 
 # Bash Promt Custom http://asemanfar.com/Current-Git-Branch-in-Bash-Prompt
 parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(git:\1)/'
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* (*\([^)]*\))*/\1/'
+}
+markup_git_branch() {
+  if [[ -n $@ ]]; then
+    if [[ -z $(git status --porcelain 2> /dev/null) ]]; then
+      echo -e " \001\033[32m\002($@)\001\033[0m\002"
+    else
+      echo -e " \001\033[31m\002($@)\001\033[0m\002"
+    fi
+  fi
 }
 parse_svn_branch() {
     parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk -F / '{print "(svn:"$1 "/" $2 ")"}'
@@ -21,14 +30,4 @@ parse_svn_url() {
 parse_svn_repository_root() {
     svn info 2>/dev/null | grep -e '^Repository Root:*' | sed -e 's#^Repository Root: *\(.*\)#\1\/#g '
 }
-export PS1="\[\033[1;33m\]\u\[\033[36m\] [\w]\[\033[0m\] \$(parse_git_branch)\$(parse_svn_branch)\[\033[37m\]$\[\033[00m\] "
-
-
-# Alias
-alias ls="ls -GF"
-alias ll="ls -lhAGF"
-alias top="top -ocpu"
-alias sshL="ssh -l username "
-alias myip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2'
-alias addkey1='ssh-add ~/.ssh/key1'
-alias passgen="openssl rand -base64 14"
+export PS1="\[\033[1;33m\]\u\[\033[36m\] [\w]\[\033[0m\] \$(markup_git_branch \$(parse_git_branch))\$(parse_svn_branch)\[\033[37m\]$\[\033[00m\] "
