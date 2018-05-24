@@ -8,26 +8,23 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
-# Bash Promt Custom http://asemanfar.com/Current-Git-Branch-in-Bash-Prompt
-parse_git_branch() {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* (*\([^)]*\))*/\1/'
-}
-markup_git_branch() {
-  if [[ -n $@ ]]; then
-    if [[ -z $(git status --porcelain 2> /dev/null) ]]; then
-      echo -e " \001\033[32m\002($@)\001\033[0m\002"
-    else
-      echo -e " \001\033[31m\002($@)\001\033[0m\002"
-    fi
-  fi
+parse_git_branch () {
+  if [ -d .git ] || git rev-parse --git-dir > /dev/null 2>&1; then git branch | sed -n '/\* /s///p'; fi  | awk '{print " ["$1"]" }'
 }
 parse_svn_branch() {
-    parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk -F / '{print "(svn:"$1 "/" $2 ")"}'
+  parse_svn_url | sed -e 's#^'"$(parse_svn_repository_root)"'##g' | awk '{print " ["$1"]" }'
 }
 parse_svn_url() {
-    svn info 2>/dev/null | grep -e '^URL*' | sed -e 's#^URL: *\(.*\)#\1#g '
+  svn info 2>/dev/null | sed -ne 's#^URL: ##p'
 }
 parse_svn_repository_root() {
-    svn info 2>/dev/null | grep -e '^Repository Root:*' | sed -e 's#^Repository Root: *\(.*\)#\1\/#g '
+  svn info 2>/dev/null | sed -ne 's#^Repository Root: ##p'
 }
-export PS1="\[\033[1;33m\]\u\[\033[36m\] [\w]\[\033[0m\] \$(markup_git_branch \$(parse_git_branch))\$(parse_svn_branch)\[\033[37m\]$\[\033[00m\] "
+
+BLACK="\[\033[0;38m\]"
+RED="\[\033[0;31m\]"
+RED_BOLD="\[\033[01;31m\]"
+BLUE="\[\033[01;34m\]"
+GREEN="\[\033[0;32m\]"
+
+export PS1="$GREEN\u@$GREEN\h:$BLUE\w$RED_BOLD\$(parse_git_branch)\$(parse_svn_branch)$BLACK$ "
