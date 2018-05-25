@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
 
-black=$'\e[30m';
-red=$'\e[31m';
-green=$'\e[32m';
-yellow=$'\e[33m';
-blue=$'\e[34m';
-purple=$'\e[35m';
-cyan=$'\e[36m';
-gray=$'\e[37m';
-reset=$'\e[0m';
+cd ~
 
-cd "$(dirname "${BASH_SOURCE}")";
+brew install wget
 
-git pull origin master;
+brew install zsh
+zsh_path=$(which zsh)
+grep -Fxq "$zsh_path" /etc/shells || sudo bash -c "echo $zsh_path >> /etc/shells"
+chsh -s "$zsh_path" $USER
+
+sh ~/.dotfiles/bootstrap.sh;
+
+cd ~
 
 function patchFonts() {
     cd ~

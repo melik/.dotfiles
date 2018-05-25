@@ -16,33 +16,27 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# Shortcuts
-alias g="git"
-alias h="history"
-alias j="jobs"
-
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
 
 alias top="top -ocpu"
 alias myip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2'
 
-alias passgen="openssl rand -base64 14"
+alias passgen="openssl rand -base64 15"
 
-# Editors
-alias a='atom'
+# Get week number
+alias week='date +%V'
 
 # ZSH
 # alias zshconfig="subl ~/.zshrc"
 # alias ohmyzsh="subl ~/.oh-my-zsh"
 
-# Get week number
-alias week='date +%V'
-
 # aliases for jail's
 # alias serverName="ssh -l login serverUrl"
 
-# aliases for ssh keys
+# Editors
+alias a='atom'
+
 # alias key='ssh-add ~/.ssh/key'
 alias key='ssh-add ~/.ssh/id_rsa'
 
