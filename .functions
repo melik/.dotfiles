@@ -8,21 +8,25 @@ function makeMD5() {
     echo -n "$@" | openssl md5
 }
 
-# Insert right HOST into _HOST_
-function mount_HOST_() {
-    MOUNT_PROJECT=$1;
-    MOUNT_LOGIN=$2;
+function mountHost() {
     CURRENT_LOGIN="$(id -u -n)";
-    MOUNT_COMMENTS=$@;
+    MOUNT_ANCHOR="/Users/${CURRENT_LOGIN}/Sites";
 
-    MOUNT_HOST="_HOST_";
-    MOUNT_POINT="/Users/$CURRENT_LOGIN/Sites";
+    MOUNT_HOST=$1
+    MOUNT_PATH=$2;
+    MOUNT_LOGIN=$3;
 
-    if [ "$MOUNT_PROJECT" = "" ]; then
+    if [ "$MOUNT_PATH" = "" ]; then
         echo "Need project name";
         echo "exit";
+
         return 1;
     else
+        if [ ! -d "$MOUNT_ANCHOR/$MOUNT_PATH" ]; then
+            echo "mkdir $MOUNT_ANCHOR/$MOUNT_PATH";
+            mkdir "$MOUNT_ANCHOR/$MOUNT_PATH"
+        fi
+
         if [ "$MOUNT_LOGIN" = "" ]; then
             echo "Use local user $CURRENT_LOGIN";
 
@@ -31,40 +35,34 @@ function mount_HOST_() {
 
         echo "Host: $MOUNT_HOST";
         echo "User: $MOUNT_LOGIN";
-        echo "Project: $MOUNT_PROJECT";
+        echo "Remote path: $MOUNT_PATH";
         echo "";
 
-        if [ ! -d "$MOUNT_POINT/$MOUNT_PROJECT" ]; then
-            echo "mkdir $MOUNT_POINT/$MOUNT_PROJECT";
-            mkdir "$MOUNT_POINT/$MOUNT_PROJECT"
-        fi
-
         # https://github.com/osxfuse/osxfuse/wiki/Mount-options
-        echo "sshfs -o auto_cache,local,volname=_HOST_/$MOUNT_PROJECT $MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PROJECT $MOUNT_POINT/$MOUNT_PROJECT";
-        sshfs -o auto_cache,local,volname=_HOST_/$MOUNT_PROJECT "$MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PROJECT" "$MOUNT_POINT/$MOUNT_PROJECT";
+        echo "sshfs -o auto_cache,reconnect,defer_permissions,negative_vncache,noappledouble,volname=$MOUNT_PATH $MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PATH $MOUNT_ANCHOR/$MOUNT_PATH";
+        sshfs -o auto_cache,reconnect,defer_permissions,negative_vncache,noappledouble,volname=$MOUNT_PATH "$MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PATH" "$MOUNT_ANCHOR/$MOUNT_PATH";
     fi
 
     echo "";
 }
 
-function unmountHOST() {
+function unmountHost() {
     CURRENT_LOGIN="$(id -u -n)";
+    MOUNT_ANCHOR="/Users/${CURRENT_LOGIN}/Sites";
 
-    MOUNT_POINT="/Users/$CURRENT_LOGIN/Sites";
+    MOUNT_PATH=$1
 
-    MOUNT_PROJECT=$1
-
-    if [ "$MOUNT_PROJECT" = "" ]; then
+    if [ "$MOUNT_PATH" = "" ]; then
         echo "Need project name";
         echo "exit";
         return 1;
     else
 
-        echo "umount -f $MOUNT_POINT/$MOUNT_PROJECT";
-        umount -f "$MOUNT_POINT/$MOUNT_PROJECT";
+        echo "umount -f $MOUNT_ANCHOR/$MOUNT_PATH";
+        umount -f "$MOUNT_ANCHOR/$MOUNT_PATH";
 
-        echo "rm -rf $MOUNT_POINT/$MOUNT_PROJECT";
-        rm -rf "$MOUNT_POINT/$MOUNT_PROJECT";
+        echo "rm -rf $MOUNT_ANCHOR/$MOUNT_PATH";
+        rm -rf "$MOUNT_ANCHOR/$MOUNT_PATH";
     fi
 
     echo "";
