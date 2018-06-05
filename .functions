@@ -39,8 +39,8 @@ function mountHost() {
         echo "";
 
         # https://github.com/osxfuse/osxfuse/wiki/Mount-options
-        echo "sshfs -o auto_cache,reconnect,defer_permissions,negative_vncache,noappledouble,volname=$MOUNT_PATH $MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PATH $MOUNT_ANCHOR/$MOUNT_PATH";
-        sshfs -o auto_cache,reconnect,defer_permissions,negative_vncache,noappledouble,volname=$MOUNT_PATH "$MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PATH" "$MOUNT_ANCHOR/$MOUNT_PATH";
+        echo "sshfs -o volname=$MOUNT_PATH $MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PATH $MOUNT_ANCHOR/$MOUNT_PATH";
+        sshfs -o volname=$MOUNT_PATH "$MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PATH" "$MOUNT_ANCHOR/$MOUNT_PATH";
     fi
 
     echo "";
