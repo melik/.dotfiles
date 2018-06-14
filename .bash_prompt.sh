@@ -1,9 +1,8 @@
-# Add line
-# source ~/.bash_prompt.sh
-# to .bashrc
+# 1. Install https://github.com/magicmonty/bash-git-prompt
+# 2. Insert in .bashrc "source ~/.bash_prompt.sh"
 
 # Set config variables first
-GIT_PROMPT_ONLY_IN_REPO=1
+GIT_PROMPT_ONLY_IN_REPO=0
 
 # GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
 # GIT_PROMPT_IGNORE_SUBMODULES=1 # uncomment to avoid searching for changed files in submodules

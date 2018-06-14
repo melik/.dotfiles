@@ -97,7 +97,7 @@ function doIt() {
     echo "ZSH_THEME=\"powerlevel9k/powerlevel9k\"" >> ~/.zshrc
 
     echo "" >> ~/.zshrc
-    echo "plugins=(httpie urltools profiles iwhois heroku rspec git gitignore git-prompt github git-flow gitignore svn node npm yarn pip virtualenv python macports colored-man-pages vagrant django docker-compose docker zsh-autosuggestions zsh-syntax-highlighting)" >> ~/.zshrc
+    echo "plugins=(httpie urltools profiles iwhois heroku rspec git git-prompt github git-flow svn node npm yarn pip virtualenv python macports colored-man-pages vagrant django docker-compose docker zsh-autosuggestions zsh-syntax-highlighting)" >> ~/.zshrc
 
     echo "" >> ~/.zshrc
     echo "# Add default user" >> ~/.zshrc
