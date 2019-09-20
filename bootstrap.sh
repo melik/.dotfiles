@@ -97,15 +97,11 @@ function doIt() {
     echo "ZSH_THEME=\"powerlevel9k/powerlevel9k\"" >> ~/.zshrc
 
     echo "" >> ~/.zshrc
-    echo "plugins=(httpie urltools profiles iwhois heroku rspec git git-prompt github git-flow svn node npm yarn pip virtualenv python macports colored-man-pages vagrant django docker-compose docker zsh-autosuggestions zsh-syntax-highlighting)" >> ~/.zshrc
+    echo "plugins=(httpie urltools profiles heroku git git-prompt github git-flow svn node npm yarn pip virtualenv python macports colored-man-pages vagrant django docker-compose docker zsh-autosuggestions zsh-syntax-highlighting)" >> ~/.zshrc
 
     echo "" >> ~/.zshrc
     echo "# Add default user" >> ~/.zshrc
     echo "DEFAULT_USER=melik" >> ~/.zshrc
-
-    echo "" >> ~/.zshrc
-    echo "# Stop AUTO_CD - Changing Directories" >> ~/.zshrc
-    echo "unsetopt AUTO_CD" >> ~/.zshrc
 
     echo "" >> ~/.zshrc
     echo "source \$ZSH/oh-my-zsh.sh" >> ~/.zshrc
@@ -117,6 +113,10 @@ function doIt() {
     echo "POWERLEVEL9K_PROMPT_ADD_NEWLINE=true" >> ~/.zshrc
     echo "# POWERLEVEL9K_PROMPT_ON_NEWLINE=true" >> ~/.zshrc
     echo "# POWERLEVEL9K_RPROMPT_ON_NEWLINE=true" >> ~/.zshrc
+
+    echo "" >> ~/.zshrc
+    echo "# Stop AUTO_CD - Changing Directories" >> ~/.zshrc
+    echo "unsetopt AUTO_CD" >> ~/.zshrc
 
     echo ""
     echo "${yellow}Don't forget to setup Non-ASCII Font in your Terminal App (Meslo)${reset}"
