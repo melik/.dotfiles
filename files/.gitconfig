@@ -12,7 +12,8 @@
 	b = branch
 	co = checkout
 	c = commit
-        po = push -u origin
+	po = push -u origin
+	contributors = shortlog --summary --numbered
 
 [color "branch"]
 	current = yellow reverse
@@ -27,7 +28,9 @@
 
 [color "status"]
 	added = yellow
+	branch = yellow
 	changed = green
+	header = white dim
 	untracked = cyan
 
 [core]

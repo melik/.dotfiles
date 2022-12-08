@@ -24,10 +24,6 @@ alias myip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2'
 
 alias passgen="openssl rand -base64 14"
 
-# ZSH
-# alias zshconfig="nano ~/.zshrc"
-# alias ohmyzsh="nano ~/.oh-my-zsh"
-
 # Get week number
 alias week='date +%V'
 
@@ -35,5 +31,6 @@ alias week='date +%V'
 # alias key='ssh-add ~/.ssh/key'
 alias key='ssh-add ~/.ssh/id_rsa'
 
-# Vagrant
-alias vgssh="vagrant up && vagrant ssh"
+# ZSH
+# alias zshconfig="nano ~/.zshrc"
+# alias ohmyzsh="nano ~/.oh-my-zsh"

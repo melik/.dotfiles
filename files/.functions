@@ -8,6 +8,34 @@ function makeMD5() {
     echo -n "$@" | openssl md5
 }
 
+# Error message along with a status information
+function err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+}
+
+# Convert html-entity to UTF-8
+htmlEntityToUTF8()
+{
+  if [ $# -eq 0 ]; then
+    echo "Usage: htmlEntityToUTF8 \"&#9661;\""
+    return 1
+  else
+    echo $1 | recode html..UTF8
+  fi
+}
+
+# Convert UTF-8 to html-entity
+UTF8toHtmlEntity()
+{
+  if [ $# -eq 0 ]; then
+    echo "Usage: UTF8toHtmlEntity \"♥\""
+    return 1
+  else
+    echo $1 | recode UTF8..html
+  fi
+}
+
+
 function mountHost() {
     CURRENT_LOGIN="$(id -u -n)";
     MOUNT_ANCHOR="/Users/${CURRENT_LOGIN}/Sites";
