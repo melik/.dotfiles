@@ -146,6 +146,10 @@ function installOhMyZsh() {
     echo "" >> ~/.zshrc
     echo "# Stop AUTO_CD - Changing Directories" >> ~/.zshrc
     echo "unsetopt AUTO_CD" >> ~/.zshrc
+    
+    echo "" >> ~/.zshrc
+    echo "bindkey "\e\e[D" backward-word" >> ~/.zshrc
+    echo "bindkey "\e\e[C" forward-word" >> ~/.zshrc
 
     echo ""
     echo "${yellow}Don't forget to setup Non-ASCII Font in your Terminal App (Meslo)${reset}"
