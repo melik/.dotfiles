@@ -11,6 +11,10 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 # Keep folders on top
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
+# Show pathbar with paths
+defaults write com.apple.finder "ShowPathbar" -bool "true"
+
+
 
 # Safari
 # Set up for development.
@@ -53,6 +57,10 @@ defaults write com.apple.dock wvous-tl-modifier -int 0
 defaults write com.apple.dock wvous-bl-corner -int 4
 defaults write com.apple.dock wvous-bl-modifier -int 0
 
+
+# Trackpad
+# Click weight (threshold) - set to medium
+defaults write com.apple.AppleMultitouchTrackpad "FirstClickThreshold" -int "1"
 
 
 # Kill affected applications
