@@ -4,38 +4,38 @@
 
 # Finder
 # Always open everything in Finder's column view. This is important.
-defaults write com.apple.Finder FXPreferredViewStyle clmv
+sudo defaults write com.apple.Finder FXPreferredViewStyle clmv
 # Set the Finder prefs for showing a few different volumes on the Desktop.
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+sudo defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+sudo defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+sudo defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
 # Keep folders on top
-defaults write com.apple.finder _FXSortFoldersFirst -bool true
+sudo defaults write com.apple.finder _FXSortFoldersFirst -bool true
 # Show pathbar with paths
-defaults write com.apple.finder "ShowPathbar" -bool "true"
+sudo defaults write com.apple.finder "ShowPathbar" -bool "true"
 
 
 
 # Safari
 # Set up for development.
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
-defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+sudo defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+sudo defaults write com.apple.Safari IncludeDevelopMenu -bool true
+sudo defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+sudo defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+sudo defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 # Show full website URL
-defaults write com.apple.safari ShowFullURLInSmartSearchField -bool true
+sudo defaults write com.apple.safari ShowFullURLInSmartSearchField -bool true
 
 # Dock
 # Icons size of 36 pixels.
-defaults write com.apple.dock tilesize -int 36
+sudo defaults write com.apple.dock tilesize -int 36
 # Display recent apps
-defaults write com.apple.dock show-recents -bool false
+sudo defaults write com.apple.dock show-recents -bool false
 # Put the Dock on the left of the screen
-defaults write com.apple.dock orientation -string left
+sudo defaults write com.apple.dock orientation -string left
 
 # Enable AirDrop over Ethernet and on unsupported Macs running Lion
-defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
+# sudo defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 
 # Hot corners
 # Possible values:
@@ -51,16 +51,23 @@ defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
 # 12: Notification Center
 # 13: Lock Screen
 # Top left screen corner → Start screen saver
-defaults write com.apple.dock wvous-tl-corner -int 5
-defaults write com.apple.dock wvous-tl-modifier -int 0
+sudo defaults write com.apple.dock wvous-tl-corner -int 5
+sudo defaults write com.apple.dock wvous-tl-modifier -int 0
 # Bottom left screen corner → Desktop
-defaults write com.apple.dock wvous-bl-corner -int 4
-defaults write com.apple.dock wvous-bl-modifier -int 0
+sudo defaults write com.apple.dock wvous-bl-corner -int 4
+sudo defaults write com.apple.dock wvous-bl-modifier -int 0
 
 
 # Trackpad
 # Click weight (threshold) - set to medium
-defaults write com.apple.AppleMultitouchTrackpad "FirstClickThreshold" -int "1"
+sudo defaults write com.apple.AppleMultitouchTrackpad "FirstClickThreshold" -int "1"
+
+
+# Desktop Services
+# Avoid creating .DS_Store files on network or USB volumes
+sudo defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# Avoid creating .DS_Store files on network or USB volumes
+sudo defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 
 # Kill affected applications
