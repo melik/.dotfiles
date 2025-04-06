@@ -35,6 +35,12 @@ function installBrew() {
     brew install ${brew_packages}
 }
 
+function installNodebyBrew() {
+    cd ~
+
+    brew install node
+}
+
 function installZsh() {
     cd ~
 
@@ -243,6 +249,15 @@ else
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo "yes\n";
         installBrew;
+    else
+        echo "no\n";
+    fi;
+
+    read -p "${red}This may install NodeJS last version. Are you sure? (y/N)${reset} " -n 1;
+    echo "";
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "yes\n";
+        installNodebyBrew;
     else
         echo "no\n";
     fi;
