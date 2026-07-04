@@ -51,6 +51,8 @@
 
 [user]
 	name = Alexey M
+	# https://github.com/settings/emails
+	# https://docs.github.com/en/account-and-profile/how-tos/email-preferences/setting-your-commit-email-address
 	email = @users.noreply.github.com
 
 [push]
