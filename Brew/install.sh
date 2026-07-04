@@ -4,8 +4,19 @@ echo "${blue}Install Brew${reset}";
 
 # cd ~
 
+# Navigate to cd /opt/homebrew/bin/
+# Run export PATH=$PATH:/opt/homebrew/bin
+# Navigate back to "home" with cd ~/
+# in this directory I found that there was no .zshrc file (:scream:)
+# So I created a file with touch .zshrc and then
+# ran this command: echo export PATH=$PATH:/opt/homebrew/bin >> .zshrc
+
 export HOMEBREW_INSTALL_FROM_API=1
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+cd /opt/homebrew/bin/
+export PATH=$PATH:/opt/homebrew/bin
+cd -
 
 echo "${blue}Install Brew packages${reset}";
 brew install git

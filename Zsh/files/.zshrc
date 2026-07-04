@@ -1,4 +1,6 @@
 export ZSH=$HOME/.oh-my-zsh
+export PATH=$PATH:/opt/homebrew/bin
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 ZSH_THEME="robbyrussell"
