@@ -1,0 +1,97 @@
+# Create a new directory and enter it
+function md() {
+    mkdir -p "$@" && cd "$@"
+}
+
+# Create md5 hash from word
+function makeMD5() {
+    echo -n "$@" | openssl md5
+}
+
+# Error message along with a status information
+function err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+}
+
+# Convert html-entity to UTF-8
+htmlEntityToUTF8()
+{
+  if [ $# -eq 0 ]; then
+    echo "Usage: htmlEntityToUTF8 \"&#9661;\""
+    return 1
+  else
+    echo $1 | recode html..UTF8
+  fi
+}
+
+# Convert UTF-8 to html-entity
+UTF8toHtmlEntity()
+{
+  if [ $# -eq 0 ]; then
+    echo "Usage: UTF8toHtmlEntity \"♥\""
+    return 1
+  else
+    echo $1 | recode UTF8..html
+  fi
+}
+
+
+function mountHost() {
+    CURRENT_LOGIN="$(id -u -n)";
+    MOUNT_ANCHOR="/Users/${CURRENT_LOGIN}/Sites";
+
+    MOUNT_HOST=$1
+    MOUNT_PATH=$2;
+    MOUNT_LOGIN=$3;
+
+    if [ "$MOUNT_PATH" = "" ]; then
+        echo "Need project name";
+        echo "exit";
+
+        return 1;
+    else
+        if [ ! -d "$MOUNT_ANCHOR/$MOUNT_PATH" ]; then
+            echo "mkdir $MOUNT_ANCHOR/$MOUNT_PATH";
+            mkdir "$MOUNT_ANCHOR/$MOUNT_PATH"
+        fi
+
+        if [ "$MOUNT_LOGIN" = "" ]; then
+            echo "Use local user $CURRENT_LOGIN";
+
+            MOUNT_LOGIN="$CURRENT_LOGIN";
+        fi
+
+        echo "Host: $MOUNT_HOST";
+        echo "User: $MOUNT_LOGIN";
+        echo "Remote path: $MOUNT_PATH";
+        echo "";
+
+        # https://github.com/osxfuse/osxfuse/wiki/Mount-options
+        echo "sshfs -o volname=$MOUNT_PATH $MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PATH $MOUNT_ANCHOR/$MOUNT_PATH";
+        sshfs -o volname=$MOUNT_PATH "$MOUNT_LOGIN@$MOUNT_HOST:/home/$MOUNT_LOGIN/$MOUNT_PATH" "$MOUNT_ANCHOR/$MOUNT_PATH";
+    fi
+
+    echo "";
+}
+
+function unmountHost() {
+    CURRENT_LOGIN="$(id -u -n)";
+    MOUNT_ANCHOR="/Users/${CURRENT_LOGIN}/Sites";
+
+    MOUNT_PATH=$1
+
+    if [ "$MOUNT_PATH" = "" ]; then
+        echo "Need project name";
+        echo "exit";
+        return 1;
+    else
+
+        echo "umount -f $MOUNT_ANCHOR/$MOUNT_PATH";
+        umount -f "$MOUNT_ANCHOR/$MOUNT_PATH";
+
+        echo "rm -rf $MOUNT_ANCHOR/$MOUNT_PATH";
+        rm -rf "$MOUNT_ANCHOR/$MOUNT_PATH";
+    fi
+
+    echo "";
+}

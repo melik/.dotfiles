@@ -7,10 +7,13 @@
 
 [alias]
 	l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+	ll = log --oneline --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
 	st = status
 	b = branch
 	co = checkout
 	c = commit
+	po = push -u origin
+	contributors = shortlog --summary --numbered
 
 [color "branch"]
 	current = yellow reverse
@@ -25,12 +28,15 @@
 
 [color "status"]
 	added = yellow
+	branch = yellow
 	changed = green
+	header = white dim
 	untracked = cyan
 
 [core]
 	autocrlf = false
 	pager = less -R
+	editor = nano
 
 [apply]
 	# Detect whitespace errors when applying a patch
@@ -41,4 +47,11 @@
 	autocorrect = 1
 
 [github]
- 	user = melik
+	user = melik
+
+[user]
+	name = Alexey M
+	email = @users.noreply.github.com
+
+[push]
+	default = matching
