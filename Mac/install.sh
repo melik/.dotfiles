@@ -1,4 +1,4 @@
-source config.sh
+source const.sh
 
 echo "${blue}Update Mac defaults${reset}";
 

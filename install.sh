@@ -1,23 +1,23 @@
-source config.sh
+source const.sh
 
 # git pull origin master;
 
 # cd "$(dirname "${BASH_SOURCE}")";
 
 # Update Bash
-Prompt "Bash" "Bash configs"
+prompt_and_do "Bash" "Bash configs"
 
 # Install Brew and some software with it
-Prompt "Brew" "Brew" "install"
+prompt_and_do "Brew" "Brew" "install"
 
 # Update Zsh
-Prompt "Zsh" "Zsh configs"
+prompt_and_do "Zsh" "Zsh configs"
 
 # Update Git
-Prompt "Git" "Git"
+prompt_and_do "Git" "Git"
 
 # Update Mac Defaults
-Prompt "Mac" "Defaults"
+prompt_and_do "Mac" "Defaults"
 
 # Update iTerm2
-Prompt "iTerm" "iTerm"
+prompt_and_do "iTerm" "iTerm"

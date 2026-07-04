@@ -1,4 +1,4 @@
-source config.sh
+source const.sh
 
 echo "${blue}Update Bash${reset}";
 
@@ -6,4 +6,8 @@ if [ -e ~/.bashrc ]; then
     mv ~/.bashrc ~/.bashrc_old
 fi
 
-rsync --exclude ".git/" --exclude ".DS_Store" -avh --no-perms ./Bash/files/* ~;
+cp ./Bash/files/.aliases ~/.aliases
+cp ./Bash/files/.bashrc ~/.bashrc
+cp ./Bash/files/.editorconfig ~/.editorconfig
+cp ./Bash/files/.functions ~/.functions
+cp ./Bash/files/.profile ~/.profile
