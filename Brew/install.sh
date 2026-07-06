@@ -20,6 +20,7 @@ cd -
 
 echo "${blue}Install Brew packages${reset}";
 brew install git
+brew install gh
 brew install svn
 brew install wget
 brew install curl
