@@ -12,7 +12,6 @@ plugins=(
     ansible
     isodate
     git
-    github
     git-flow
     gitignore
     svn
