@@ -11,6 +11,7 @@ plugins=(
     macports
     ansible
     isodate
+    gh
     git
     git-flow
     gitignore
