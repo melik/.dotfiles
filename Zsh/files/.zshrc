@@ -31,6 +31,7 @@ plugins=(
     command-not-found
     colored-man-pages
     heroku
+    opencode
 )
 
 # Add default user
